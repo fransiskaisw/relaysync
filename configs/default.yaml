@@ -1,0 +1,91 @@
+# Semua ambang ada di sini. Nilai awal perlu disetel di lapangan.
+broker:
+  host: broker.hivemq.com
+  port: 8883
+  tls: true
+  keepalive_s: 30
+  ws_url: wss://broker.hivemq.com:8884/mqtt
+
+edge:
+  window_s: 1.0              # jendela fitur
+  sample_interval_ms: 50     # 20 Hz
+  step_sensor: stepcounter   # kata kunci pencarian nama sensor (tanpa spasi/underscore)
+  accel_sensor: accelerometer
+  gyro_sensor: gyroscope
+  cadence_window_s: 5.0      # jendela geser kadens
+  max_gyro_dt_s: 0.5
+  step_lengths:
+    edge1_m: 0.75
+    edge2_m: 0.75
+  step_len_min_m: 0.3
+  step_len_max_m: 2.5
+  hw_stall_s: 8.0            # step counter dianggap diam bila accelerometer melihat langkah
+  hw_stall_min_accel_steps: 8
+
+accel_steps:
+  threshold_dev_ms2: 2.5     # puncak |a| - 9,81 minimal untuk dihitung langkah
+  refractory_s: 0.25
+  smooth_alpha: 0.4
+
+readiness:
+  stationary_dev_max: 0.8
+  walk_cadence_spm: 110
+  run_cadence_spm: 140
+  run_hold_s: 2.0
+  hysteresis_spm: 15
+  turn_gyro_path_rad: 0.5
+
+speed:
+  window_s: 4.0
+  min_speed_mps: 0.5
+
+track:
+  leg_length_m: 60.0
+  zone_length_m: 20.0
+  entry_margin_m: 5.0
+
+fusion:
+  gap_opt_min_m: 0.0
+  gap_opt_max_m: 4.0
+  gap_far_m: 8.0
+  speed_match_tol_mps: 1.5
+  early_start_margin_m: 25.0
+  stall_cadence_spm: 60.0
+  stall_s: 3.0
+  hold_s: 2.0
+  clear_s: 3.0
+  optimal_exit_s: 1.0
+  pass_gap_m: 1.5
+  pass_hold_s: 1.0
+  auto_handoff: true
+  data_gap_s: 6.0
+
+cue:
+  go_trigger_m: 10.0
+  go_cue_eta_s: 1.5
+  cue_cooldown_s: 5.0
+  alert_cooldown_s: 5.0
+  vibrate_cue_ms: 250
+  vibrate_alert_ms: 800
+  alert_pulses: 3
+  alert_pause_ms: 400
+
+score:
+  start: 100.0
+  gap_target_m: 2.0
+  gap_penalty_per_m: 8.0
+  speed_penalty_per_mps: 6.0
+  alert_penalty: 10.0
+  clean_bonus: 5.0
+
+engine:
+  tick_s: 0.5
+  session_heartbeat_s: 1.0
+  max_clock_skew_s: 60.0
+  calibrate_default_m: 20.0
+  calibrate_min_m: 5.0
+  calibrate_max_m: 100.0
+  leg_min_m: 20.0
+  leg_max_m: 200.0
+  zone_min_m: 5.0
+  zone_max_m: 50.0
